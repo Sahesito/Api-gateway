@@ -15,43 +15,46 @@ spring:
           uri: lb://AUTH-SERVICE
           predicates:
             - Path=/auth/**
-          filters:
-            - RewritePath=/auth/(?<segment>.*), /${segment}
 
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
             - Path=/users/**
-          filters:
-            - RewritePath=/users/(?<segment>.*), /${segment}
 
         - id: product-service
           uri: lb://PRODUCT-SERVICE
           predicates:
             - Path=/products/**
-          filters:
-            - RewritePath=/products/(?<segment>.*), /${segment}
 
         - id: inventory-service
           uri: lb://INVENTORY-SERVICE
           predicates:
             - Path=/inventory/**
-          filters:
-            - RewritePath=/inventory/(?<segment>.*), /${segment}
 
         - id: order-service
           uri: lb://ORDER-SERVICE
           predicates:
             - Path=/orders/**
-          filters:
-            - RewritePath=/orders/(?<segment>.*), /${segment}
 
         - id: payment-service
           uri: lb://PAYMENT-SERVICE
           predicates:
             - Path=/payments/**
-          filters:
-            - RewritePath=/payments/(?<segment>.*), /${segment}
+
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+            maxAge: 3600
 
 eureka:
   client:
